@@ -42,7 +42,10 @@ class AuthController extends Controller
         }
 
         $this->session->setFlash('errors', [
-            'login' => ['Incorrect login or password'],
+            'login' => 'Incorrect login or password',
+        ]);
+        $this->session->setFlash('old', [
+            'login' => $validated['login'],
         ]);
         $this->response->back();
     }

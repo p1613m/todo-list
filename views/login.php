@@ -2,6 +2,7 @@
 /**
  * @var \App\Core\View $this
  */
+$this->title = 'Login';
 ?>
 
 <div class="container mt-5">

@@ -41,7 +41,7 @@ class Session
      * Get flash message
      *
      * @param string $key
-     * @return mixed|null
+     * @return mixed
      */
     public function getFlash(string $key): mixed
     {
@@ -78,9 +78,9 @@ class Session
      *
      * @param string $key
      * @param string $value
-     * @return string|null
+     * @return mixed
      */
-    public function getInnerFlash(string $key, string $value): string|null
+    public function getInnerFlash(string $key, string $value): mixed
     {
         if ($this->hasFlash($key)) {
             return $this->getFlash($key)[$value] ?? null;

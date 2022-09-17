@@ -69,7 +69,7 @@ class View
      */
     public function old(string $key, $default = null): mixed
     {
-        return $this->session->getInnerFlash('old', $key) ?? $default;
+        return $this->esc($this->session->getInnerFlash('old', $key) ?? $default);
     }
 
     /**
