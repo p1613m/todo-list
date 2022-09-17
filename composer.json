@@ -1,0 +1,19 @@
+{
+  "name": "p1613m/simple-mvc",
+  "autoload": {
+    "psr-4": {
+      "App\\Core\\": "core/",
+      "App\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Victor Burakov"
+    }
+  ],
+  "minimum-stability": "beta",
+  "require": {
+    "vlucas/phpdotenv": "^5.4",
+    "ext-pdo": "*"
+  }
+}
