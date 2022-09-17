@@ -23,7 +23,7 @@ class Response
      * @param $url
      * @return void
      */
-    public function redirect($url)
+    public function redirect($url): void
     {
         $this->setStatusCode(301);
 

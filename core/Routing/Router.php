@@ -54,7 +54,8 @@ class Router
 
         if ($route) {
             if (!$this->isMiddlewareAccess($route)) {
-                $this->response->redirectRoute('/');
+                $loginRoute = Application::$app->config['LOGIN_ROUTE'] ?? '/';
+                $this->response->redirectRoute(!Application::$app->user ? $loginRoute : '/');
             }
 
             $action = $route->action;
