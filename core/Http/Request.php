@@ -7,10 +7,16 @@ use App\Core\Validator;
 
 class Request
 {
+    public Application $app;
     public array $parameters;
 
-    public function __construct()
+
+    /**
+     * @param Application $app
+     */
+    public function __construct(Application $app)
     {
+        $this->app = $app;
         $this->parameters = $this->getBody();
     }
 
@@ -61,7 +67,7 @@ class Request
      */
     public function getBaseUrl(string $url = ''): string
     {
-        return Application::$app->config['BASE_URL'] . $url;
+        return $this->app->config['BASE_URL'] . $url;
     }
 
     /**
@@ -71,7 +77,7 @@ class Request
      */
     public function getRelativePath(): string
     {
-        return Application::$app->config['RELATIVE_PATH'];
+        return $this->app->config['RELATIVE_PATH'];
     }
 
     /**
@@ -102,9 +108,9 @@ class Request
         $validator = new Validator($this->parameters, $rules, $messages);
 
         if($validator->hasErrors()) {
-            Application::$app->session->setFlash('errors', $validator->getErrors());
-            Application::$app->session->setFlash('old', $this->parameters);
-            Application::$app->response->back();
+            $this->app->session->setFlash('errors', $validator->getErrors());
+            $this->app->session->setFlash('old', $this->parameters);
+            $this->app->response->back();
             return false;
         }
 

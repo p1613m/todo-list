@@ -3,7 +3,6 @@
 namespace App\Core\Database;
 
 use App\Core\Abstracts\Model;
-use App\Core\Abstracts\SingletonFactory;
 use App\Core\Interfaces\Database\BuilderInterface;
 
 /**
@@ -11,7 +10,7 @@ use App\Core\Interfaces\Database\BuilderInterface;
  */
 class Builder implements BuilderInterface
 {
-    protected SingletonFactory $model;
+    protected Model $model;
     protected array $whereConditions = [];
     protected string $limitRaw = '';
     protected string $offsetRaw = '';
@@ -21,9 +20,9 @@ class Builder implements BuilderInterface
     /**
      * Init builder with model
      *
-     * @param SingletonFactory $model
+     * @param Model $model
      */
-    public function __construct(SingletonFactory $model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
@@ -125,9 +124,9 @@ class Builder implements BuilderInterface
     /**
      * Prepare result
      *
-     * @return SingletonFactory
+     * @return DB
      */
-    private function prepareResult(): SingletonFactory
+    private function prepareResult(): DB
     {
         return DB::execute($this->getSql(), $this->whereConditions);
     }

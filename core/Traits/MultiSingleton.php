@@ -1,25 +1,22 @@
 <?php
 
-namespace App\Core\Abstracts;
-
-use App\Core\Interfaces\SingletonInterface;
+namespace App\Core\Traits;
 
 /**
  * Singleton Factory for models and DB
  */
-abstract class SingletonFactory implements SingletonInterface
+trait MultiSingleton
 {
-    static ?array $instances = [];
+    static array $instances = [];
 
     /**
      * Get instance
      *
-     * @return static
+     * @return self
      */
     static function getInstance(): self
     {
         $class = get_called_class();
-
         if (!isset(self::$instances[$class])) {
             self::$instances[$class] = new $class();
         }

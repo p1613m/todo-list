@@ -11,18 +11,19 @@ use App\Core\Http\Response;
  */
 class Router
 {
+    public Application $app;
     public Request $request;
     public Response $response;
     public array $routes = [];
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param Application $app
      */
-    public function __construct(Request $request, Response $response)
+    public function __construct(Application $app)
     {
-        $this->request = $request;
-        $this->response = $response;
+        $this->app = $app;
+        $this->request = $app->request;
+        $this->response = $app->response;
     }
 
     /**
@@ -54,7 +55,7 @@ class Router
 
         if ($route) {
             if (!$this->isMiddlewareAccess($route)) {
-                $loginRoute = Application::$app->config['LOGIN_ROUTE'] ?? '/';
+                $loginRoute = $this->app->config['LOGIN_ROUTE'] ?? '/';
                 $this->response->redirectRoute(!Application::$app->user ? $loginRoute : '/');
             }
 
@@ -115,12 +116,12 @@ class Router
     {
         switch ($route->middleware) {
             case 'guest':
-                if (Application::$app->user) {
+                if ($this->app->user) {
                     return false;
                 }
                 break;
             case 'admin':
-                if (!Application::$app->user) {
+                if (!$this->app->user) {
                     return false;
                 }
                 break;

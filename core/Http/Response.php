@@ -6,6 +6,13 @@ use App\Core\Application;
 
 class Response
 {
+    public Application $app;
+
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+
     /**
      * Set header status code for response
      *
@@ -49,6 +56,6 @@ class Response
      */
     public function redirectRoute($route): void
     {
-        $this->redirect(Application::$app->router->getUrl($route));
+        $this->redirect($this->app->router->getUrl($route));
     }
 }

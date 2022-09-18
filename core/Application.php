@@ -11,7 +11,7 @@ use Dotenv\Dotenv;
 /**
  * Application
  */
-class Application
+final class Application
 {
     public static string $ROOT_PATH;
     public static Application $app;
@@ -37,9 +37,9 @@ class Application
         $this->user = null;
         $this->authUser();
 
-        $this->request = new Request();
-        $this->response = new Response();
-        $this->router = new Router($this->request, $this->response);
+        $this->request = new Request($this);
+        $this->response = new Response($this);
+        $this->router = new Router($this);
         $this->view = new View($this);
     }
 

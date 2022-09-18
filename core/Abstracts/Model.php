@@ -6,12 +6,15 @@ use App\Core\Database\Builder;
 use App\Core\Database\DB;
 use App\Core\Interfaces\Database\ModelInterface;
 use App\Core\Interfaces\Database\BuilderInterface;
+use App\Core\Traits\MultiSingleton;
 
 /**
  * Abstract class for base model
  */
-abstract class Model extends SingletonFactory implements ModelInterface
+abstract class Model implements ModelInterface
 {
+    use MultiSingleton;
+
     public string $tableName;
     public array $fillable = [];
     public string $primaryKey = 'id';
@@ -32,9 +35,9 @@ abstract class Model extends SingletonFactory implements ModelInterface
      * Load model data to public params
      *
      * @param array $attributes
-     * @return $this
+     * @return self
      */
-    public function load(array $attributes)
+    public function load(array $attributes): self
     {
         if(!$this->{$this->primaryKey}) {
             $this->{$this->primaryKey} = $attributes[$this->primaryKey] ?? null;

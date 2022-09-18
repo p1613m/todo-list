@@ -2,17 +2,20 @@
 
 namespace App\Core\Database;
 
+use App\Core\Abstracts\Model;
 use App\Core\Abstracts\SingletonFactory;
 use App\Core\Application;
+use App\Core\Traits\MultiSingleton;
 use PDO;
 use PDOStatement;
 
 /**
  * Database manage
  */
-class DB extends SingletonFactory
+class DB
 {
-    static ?self $instance;
+    use MultiSingleton;
+
     public PDO $pdo;
     public PDOStatement $statement;
 
@@ -30,9 +33,9 @@ class DB extends SingletonFactory
      *
      * @param string $sql
      * @param array $attributes
-     * @return SingletonFactory
+     * @return DB
      */
-    public static function execute(string $sql, array $attributes): SingletonFactory
+    public static function execute(string $sql, array $attributes): DB
     {
         $instance = self::getInstance();
         $instance->statement = $instance->pdo->prepare($sql);
