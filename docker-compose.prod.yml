@@ -4,7 +4,7 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./:/var/www
+      - ./:/var/www/todo.luperkal.ru
       - ./.docker/nginx/prod/conf.d/:/etc/nginx/conf.d/
     ports:
       - "80:80"
@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: ./.docker/app/Dockerfile
     volumes:
-      - ./:/var/www
+      - ./:/var/www/todo.luperkal.ru
     depends_on:
       - db
     container_name: todo_app
