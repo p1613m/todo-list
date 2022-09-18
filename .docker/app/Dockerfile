@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
       libpng-dev \
       libzip-dev \
       zip unzip \
+      nano \
+      copy \
       git && \
       docker-php-ext-install pdo_mysql && \
       docker-php-ext-install bcmath && \
