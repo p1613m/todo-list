@@ -5,7 +5,7 @@ services:
     image: nginx:latest
     volumes:
       - ./:/var/www/todo.local
-      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./.docker/nginx/local/conf.d/:/etc/nginx/conf.d/
     ports:
       - "80:80"
     container_name: todo_nginx
